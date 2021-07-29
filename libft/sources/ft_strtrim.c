@@ -6,7 +6,7 @@
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 12:55:18 by indoming          #+#    #+#             */
-/*   Updated: 2021/07/29 12:36:24 by indoming         ###   ########.fr       */
+/*   Updated: 2021/07/29 13:43:09 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	pos = 0;
 	start = 0;
-	if (s1 == 0 || set == 0)
+	if (!s1 || !set)
 		return (0);
 	end = (int)ft_strlen(s1);
 	while (s1[start] && ft_setcheck(s1[start], set))
