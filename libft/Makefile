@@ -6,7 +6,7 @@
 #    By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 17:29:23 by indoming          #+#    #+#              #
-#    Updated: 2021/08/06 13:16:26 by indoming         ###   ########.fr        #
+#    Updated: 2021/08/09 12:18:00 by indoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,18 @@ ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c ft_strl
  ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c\
  ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
 
+BONUS_FILES = ft_lstnew.c ft_lstadd_front.c\
+
 SRC = $(addprefix $(SRC_FOLDER)/, $(SRC_FILES))
+
+BONUS = $(addprefix $(SRC_FOLDER)/, $(BONUS_FILES))
 
 CC = gcc
 RM = rm -f
 CFLAGS = -Wall -Werror -Wextra
 
 SRC_O = $(SRC:.c=.o)
+BONUS_O = $(BONUS:.c=.o)
 
 all: $(NAME)
 
@@ -40,12 +45,14 @@ $(NAME): $(SRC_O)
 	$(CC) ${FLAGS} -I ${INCLUDE_DIR} -o $@ -c $<
 
 clean:
-	rm -rf  $(SRC_O)
+	rm -rf  $(SRC_O) $(BONUS_O)
 
 fclean: clean
 		rm -rf $(NAME)
 
 re: 	fclean all clean
 
-cleanall: 
-	rm *.o *.a a.out
+bonus:	$(BONUS_O)
+			ar rcs $(NAME) $(BONUS_O)
+
+.PHONY: all clean fclean re bonus

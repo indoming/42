@@ -6,7 +6,7 @@
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 12:19:45 by indoming          #+#    #+#             */
-/*   Updated: 2021/08/06 12:30:10 by indoming         ###   ########.fr       */
+/*   Updated: 2021/08/09 12:17:12 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 typedef struct s_list
 {
-void	*content;
-struct	s_list *next;
+	void	*content;
+	struct	s_list *next;
 } t_list;
 
 int		ft_atoi(const char *str);
@@ -56,5 +56,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	**ft_spit(char const *s, char c);
+t_list  *ft_lstnew(void *content);
+void	ft_lstadd_front(t_list **lst, t_list *new);
 
 #endif
