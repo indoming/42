@@ -6,7 +6,7 @@
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 12:25:32 by indoming          #+#    #+#             */
-/*   Updated: 2021/08/10 12:38:49 by indoming         ###   ########.fr       */
+/*   Updated: 2021/08/10 13:14:05 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,23 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_lst;
-	t_list	*new_elem;
+	t_list	*new;
+	t_list	*aux;
+	t_list	*auxnew;
 
-	if (!lst || !f)
+	aux = lst;
+	new = malloc(sizeof(t_list));
+	if (!new)
 		return (0);
-	if (!(new_elem = ft_lstnew(f(lst->content))))
+	auxnew = new;
+	while (aux)
 	{
-		ft_lstclear(&lst, del);
-		return (0);
+		auxnew->content = f(aux->content);
+		auxnew->next = malloc(sizeof(t_list));
+		if (!(auxnew->next))
+			ft_lstclear(&aux, del);
+		aux = aux->next;
+		auxnew = auxnew->next;
 	}
-	new_lst = new_elem;
-	lst = lst->next;
-	while (lst)
-	{
-		if (!(new_elem = ft_lstnew(f(lst->content))))
-		{
-			ft_lstclear(&lst, del);
-			ft_lstclear(&new_lst, del);
-			break ;
-		}
-		lst = lst->next;
-		ft_lstadd_back(&new_lst, new_elem);
-	}
-	return (new_lst);
+	return (new);
 }
