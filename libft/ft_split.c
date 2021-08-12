@@ -6,7 +6,7 @@
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 13:54:24 by indoming          #+#    #+#             */
-/*   Updated: 2021/08/06 13:15:07 by indoming         ###   ########.fr       */
+/*   Updated: 2021/08/12 11:28:56 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_num_word(char const *s, char c)
 		else
 		{
 			count++;
-			while (s[pos] != c)
+			while (s[pos] && s[pos] != c)
 				pos++;
 		}
 	}
@@ -57,11 +57,11 @@ char	**ft_split2(char **word, char const *s, char c, int numw)
 	i = 0;
 	pos = 0;
 	word_len = 0;
-	while (i < numw)
+	while (s[pos] && i < numw)
 	{
-		while (s[pos] == c)
+		while (s[pos] && s[pos] == c)
 			pos++;
-		while (s[pos] != c)
+		while (s[pos] && s[pos] != c)
 		{
 			pos++;
 			word_len++;

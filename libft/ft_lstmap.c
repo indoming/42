@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/28 09:23:08 by indoming          #+#    #+#             */
-/*   Updated: 2021/07/28 12:06:26 by indoming         ###   ########.fr       */
+/*   Created: 2021/08/10 12:25:32 by indoming          #+#    #+#             */
+/*   Updated: 2021/08/12 11:56:40 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*s2;
-	size_t	start2;
-	size_t	len2;
+	t_list	*new;
+	t_list	*aux;
+	t_list	*temp;
 
-	if (!s || len == 0)
+	if (!lst || !f)
 		return (0);
-	s2 = (char *)malloc(sizeof(*s) * (len + 1));
-	if (!s2)
+	new = ft_lstnew(f(lst->content));
+	if (!new)
 		return (0);
-	start2 = start;
-	len2 = 0;
-	while (start2 < ft_strlen(s) && len2 < len)
+	aux = new;
+	lst = lst->next;
+	while (lst)
 	{
-		s2[len2] = s[start2];
-		len2++;
-		start2++;
+		temp = ft_lstnew(f(lst->content));
+		if (!temp)
+			return (0);
+		aux->next = temp;
+		aux = temp;
+		lst = lst->next;
 	}
-	s2[len2] = '\0';
-	return (s2);
+	return (new);
 }

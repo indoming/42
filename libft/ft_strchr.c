@@ -6,7 +6,7 @@
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 09:46:09 by indoming          #+#    #+#             */
-/*   Updated: 2021/07/27 11:48:25 by indoming         ###   ########.fr       */
+/*   Updated: 2021/08/12 12:09:03 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != '\0' && c != *s)
+	while ((char)c != *s)
+	{
+		if (!*s)
+			return (0);
 		s++;
-	if (c == *s)
-		return ((char *)s);
-	return (0);
+	}
+	return ((char *)s);
 }

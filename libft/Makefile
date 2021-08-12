@@ -6,15 +6,13 @@
 #    By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 17:29:23 by indoming          #+#    #+#              #
-#    Updated: 2021/08/10 12:28:31 by indoming         ###   ########.fr        #
+#    Updated: 2021/08/11 12:27:50 by indoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRC_FOLDER = sources
-
-INCLUDE_DIR = library
+LIBFT_FILES = libft.h
 
 SRC_FILES = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isprint.c ft_isascii.c\
 ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c ft_strlcat.c ft_strlcpy.c\
@@ -26,9 +24,9 @@ ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c ft_strl
 BONUS_FILES = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c\
 ft_lstclear.c ft_lstiter.c ft_lstmap.c\
 
-SRC = $(addprefix $(SRC_FOLDER)/, $(SRC_FILES))
+SRC = $(SRC_FILES)
 
-BONUS = $(addprefix $(SRC_FOLDER)/, $(BONUS_FILES))
+BONUS = $(BONUS_FILES)
 
 CC = gcc
 RM = rm -f
@@ -43,7 +41,7 @@ $(NAME): $(SRC_O)
 		ar rcs $(NAME) $(SRC_O)
 
 %.o: %.c
-	$(CC) ${FLAGS} -I ${INCLUDE_DIR} -o $@ -c $<
+	$(CC) ${FLAGS} -I ${LIBFT_FILES} -o $@ -c $<
 
 clean:
 	rm -rf  $(SRC_O) $(BONUS_O)

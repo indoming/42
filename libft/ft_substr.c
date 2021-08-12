@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 12:37:55 by indoming          #+#    #+#             */
-/*   Updated: 2021/07/27 11:55:54 by indoming         ###   ########.fr       */
+/*   Created: 2021/07/28 09:23:08 by indoming          #+#    #+#             */
+/*   Updated: 2021/08/12 11:21:02 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int					cnt;
-	int					neg;
-	unsigned long long	num;
+	char	*s2;
+	size_t	s_len;
+	size_t	end;
 
-	cnt = 0;
-	neg = 1;
-	num = 0;
-	while ((str[cnt] >= '\t' && str[cnt] <= '\r') || str[cnt] == ' ')
-		cnt++;
-	while (str[cnt] == '+' || str[cnt] == '-')
-	{
-		if (str[cnt] == '-')
-			neg = neg * -1;
-		cnt++;
-	}
-	while (str[cnt] >= '0' && str[cnt] <= '9')
-	{
-		num = (str[cnt] - '0') + (num * 10);
-		cnt++;
-	}
-	return (num * neg);
+	if (!s)
+		return (0);
+	s_len = ft_strlen(s);
+	end = 0;
+	if (start < s_len)
+		end = s_len - start;
+	if (end > len)
+		end = len;
+	s2 = (char *)malloc((end + 1) * sizeof(char));
+	if (!s2)
+		return (0);
+	ft_strlcpy(s2, s + start, end + 1);
+	return (s2);
 }

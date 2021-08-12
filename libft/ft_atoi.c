@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/10 12:25:32 by indoming          #+#    #+#             */
-/*   Updated: 2021/08/10 13:14:05 by indoming         ###   ########.fr       */
+/*   Created: 2021/07/19 12:37:55 by indoming          #+#    #+#             */
+/*   Updated: 2021/08/12 12:07:12 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+int	ft_atoi(const char *str)
 {
-	t_list	*new;
-	t_list	*aux;
-	t_list	*auxnew;
+	int					cnt;
+	int					neg;
+	unsigned long long	num;
 
-	aux = lst;
-	new = malloc(sizeof(t_list));
-	if (!new)
+	cnt = 0;
+	neg = 1;
+	num = 0;
+	if (!str)
 		return (0);
-	auxnew = new;
-	while (aux)
+	while ((str[cnt] >= '\t' && str[cnt] <= '\r') || str[cnt] == ' ')
+		cnt++;
+	if (str[cnt] == '-')
+		neg = -1;
+	if (str[cnt] == '+' || str[cnt] == '-')
+		cnt++;
+	while (str[cnt] >= '0' && str[cnt] <= '9')
 	{
-		auxnew->content = f(aux->content);
-		auxnew->next = malloc(sizeof(t_list));
-		if (!(auxnew->next))
-			ft_lstclear(&aux, del);
-		aux = aux->next;
-		auxnew = auxnew->next;
+		num = (str[cnt] - '0') + (num * 10);
+		cnt++;
 	}
-	return (new);
+	return (num * neg);
 }
