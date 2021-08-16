@@ -6,7 +6,7 @@
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 12:25:32 by indoming          #+#    #+#             */
-/*   Updated: 2021/08/12 11:56:40 by indoming         ###   ########.fr       */
+/*   Updated: 2021/08/16 09:13:18 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	{
 		temp = ft_lstnew(f(lst->content));
 		if (!temp)
+		{
+			ft_lstclear(&new, del);
 			return (0);
+		}
 		aux->next = temp;
 		aux = temp;
 		lst = lst->next;

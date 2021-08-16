@@ -6,7 +6,7 @@
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 12:19:45 by indoming          #+#    #+#             */
-/*   Updated: 2021/08/11 13:03:02 by indoming         ###   ########.fr       */
+/*   Updated: 2021/08/16 09:40:09 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stddef.h>
 
 typedef struct s_list
 {

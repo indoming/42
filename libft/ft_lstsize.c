@@ -6,7 +6,7 @@
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 09:19:18 by indoming          #+#    #+#             */
-/*   Updated: 2021/08/10 09:35:30 by indoming         ###   ########.fr       */
+/*   Updated: 2021/08/16 10:06:03 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	t_list	*new;
-	int		n;
+	int	size;
 
-	n = 0;
-	new = lst;
-	while (new != '\0')
+	size = 0;
+	while (lst)
 	{
-		n++;
-		new = new->next;
+		lst = lst->next;
+		size++;
 	}
-	return (n);
+	return (size);
 }
