@@ -6,52 +6,53 @@
 /*   By: indoming <indoming@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 09:34:27 by indoming          #+#    #+#             */
-/*   Updated: 2021/09/14 13:53:03 by indoming         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:20:30 by indoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-void	ft_printstr(int fd, char *str, int *size)
+void	ft_printstr(char *str, int fd, int *size)
 {
 	int	pos;
 
 	if (!str)
 		str = "(null)";
 	pos = 0;
-	while (s[pos] != '\0')
+	while (str[pos] != '\0')
 	{
-		ft_printone(str[pos], fd, size);
+		ft_printchar(str[pos], fd, size);
 		pos++;
 	}
 }
 
-void	ft_printone(int fd, char c, int *size)
+void	ft_printchar(char c, int fd, int *size)
 {
 	write(fd, &c, 1);
-	&size += 1;
+	*size += 1;
 }
 
-int	ft_conversor(char conver, va_list args, int *size)
+void	ft_conversor(char conver, va_list list, int *size)
 {
 	if (conver == 'c')
-		ft_printone(va_arg(list, int), 1, ret);
+		ft_printchar(va_arg(list, int), 1, size);
 	else if (conver == 's')
-		ft_printstr(va_arg(list, char *), 1, ret);
+		ft_printstr(va_arg(list, char *), 1, size);
 	else if (conver == 'p')
-		ft_printptr(va_arg(list, unsigned long long), *size)
-//	else if (conver == 'd')
-//
-//	else if (conver == 'i')
-//
-//	else if (conver == 'u')
-//
-//	else if (concer == 'x')
-//
-//	else if (conver == 'X')
-//		
+	{
+		ft_printstr("0x", 1, size);
+		ft_printhex_min(va_arg(list, uintptr_t), 16, size);
+	}	
+	else if (conver == 'd' || conver == 'i')
+		ft_printnum(va_arg(list, int), 1, size);
+	else if (conver == 'u')
+		ft_printunk(va_arg(list, unsigned int), 1, size);
+	else if (conver == 'x') 
+	   ft_printhex_min(va_arg(list, unsigned int), 16, size);
+	else if	(conver == 'X')
+		ft_printhex_may(va_arg(list, unsigned int), 16, size);
 	else if (conver == '%')
-		ft_printone(%, 1, ret);
+		ft_printchar('%', 1, size);
 }
 
 int	ft_printf(const char *str, ...)
@@ -65,13 +66,13 @@ int	ft_printf(const char *str, ...)
 	va_start(list, str);
 	while (str[pos] != '\0')
 	{
-		if (str[pos] == %)
+		if (str[pos] == '%')
 		{
 			pos++;
 			ft_conversor(str[pos], list, &size);
 		}
 		else
-			ft_putchar_fd(str[pos], 1, &size);
+			ft_printchar(str[pos], 1, &size);
 		pos++;
 	}
 	return (size);
